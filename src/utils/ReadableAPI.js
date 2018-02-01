@@ -10,7 +10,7 @@ if (!token)
   'Authorization': token
 }
 
-export const getAllCategories = () =>
+export const fetchCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data.categories)
@@ -20,10 +20,10 @@ export const getAllPosts = () =>
       .then(res => res.json())
       .then(data => data)
 
-// export const remove = (contact) =>
-//   fetch(`${api}/contacts/${contact.id}`, { method: 'DELETE', headers })
-//     .then(res => res.json())
-//     .then(data => data.contact)
+export const getPostsByCategory = (category) =>
+  fetch(`${api}/${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)
 
 // export const create = (body) =>
 //   fetch(`${api}/contacts`, {
