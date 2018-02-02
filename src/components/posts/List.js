@@ -1,5 +1,5 @@
 /* React */
-import React, { Component } from 'react'
+import React from 'react'
 
 /* Router */
 // import { Link } from 'react-router-dom'
@@ -7,24 +7,23 @@ import React, { Component } from 'react'
 /* Prop Types */
 import PropTypes from 'prop-types'
 
-class List extends Component {
-    static propTypes = {
-        posts: PropTypes.array.isRequired,
-    }
+const List = (props) => {
+  const {
+    posts
+  } = props
+  return (
+    <div className="list-posts">
+      <ol className="posts-list">
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ol>
+    </div>
+  )
+}
 
-    render() {
-        const { posts } = this.props
-
-        return (
-            <div className="list-posts">
-                <ol className="posts-list">
-                    {posts.map(post => (
-                        <li key={post.id}>{post.title}</li>
-                    ))}
-                </ol>
-            </div>
-        )
-    }
+List.propTypes = {
+  posts: PropTypes.array.isRequired,
 }
 
 export default List

@@ -2,7 +2,10 @@
 import React, { Component } from 'react'
 
 /* Route */
-import { Route, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, 
+  Route, 
+  withRouter 
+} from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
@@ -10,11 +13,9 @@ import { connect } from 'react-redux'
 import ListCategories from '../categories/List'
 import ListPosts from '../posts/List'
 
-/* API */
-import * as ReadableAPI from '../../utils/ReadableAPI'
-
 import {
   getCategories,
+  getPosts
 } from '../../actions'
 
 class App extends Component {
@@ -25,38 +26,28 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getAllCategories()
-    
-    ReadableAPI.getAllPosts().then((posts) => {
-      console.log('posts', posts)
-      this.setState({ 
-        posts: posts
-      })
-    })
-    ReadableAPI.getPostsByCategory('react').then((posts) => {
-      console.log('category posts: ', posts)
-    })
-
+    this.props.getAllPosts()
   }
 
   render() {
     const {
-      categories
+      categories, posts
     } = this.props
     return (
-      <div className="App">
-        <Route exact path='/' render={() => (
-          <div>
+      <Router>
+        <div className="App">
+          <Route exact path='/' render={() => (
+            <div>
             <ListCategories
               categories={categories}
             />
             <ListPosts
-              posts={this.state.posts}
+              posts={posts}
             />
-          </div>
-        )} />
-
-
-      </div>
+            </div>
+          )} />
+        </div>
+      </Router>
     )
   }
 }
@@ -68,11 +59,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAllCategories(){
-      dispatch(getCategories());
+      dispatch(getCategories())
+    },
+    getAllPosts(){
+      dispatch(getPosts())
     },
   }
 }
 
 export default withRouter(
   connect(mapStateToProps,mapDispatchToProps) (App)
-);
+)
