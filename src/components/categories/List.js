@@ -2,7 +2,7 @@
 import React from 'react'
 
 /* Router */
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 /* Prop Types */
 import PropTypes from 'prop-types'
@@ -17,7 +17,7 @@ const List = (props) => {
     <div className="list-categories">
       <ol className="categories-list">
         {categories.map(category => (
-          <li key={category.path}>{category.name}</li>
+          <li key={category.path}><Link to={`/${category.path}`} >{category.name}</Link></li>
         ))}
       </ol>
     </div>

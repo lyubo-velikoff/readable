@@ -10,13 +10,17 @@ import { BrowserRouter as Router,
 import { connect } from 'react-redux'
 
 /* Components */
+import Category from '../categories/Category'
 import ListCategories from '../categories/List'
+
 import ListPosts from '../posts/List'
 
 import {
   getCategories,
   getPosts
 } from '../../actions'
+
+import MainPage from '../pages/Main'
 
 class App extends Component {
   state = {
@@ -36,16 +40,28 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+
+          <ListCategories
+            categories={categories}
+          />
+
           <Route exact path='/' render={() => (
             <div>
-            <ListCategories
-              categories={categories}
-            />
             <ListPosts
               posts={posts}
             />
             </div>
           )} />
+
+          <Route path={`/:category`} render={ ({match}) => (
+            <div>
+              <Category
+                category={match.params.category}
+                posts={posts}
+              />
+            </div>
+          )} />
+
         </div>
       </Router>
     )
@@ -68,5 +84,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(
-  connect(mapStateToProps,mapDispatchToProps) (App)
+  connect(mapStateToProps, mapDispatchToProps) (App)
 )
