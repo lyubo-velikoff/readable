@@ -11,15 +11,15 @@ import { connect } from 'react-redux'
 
 /* Components */
 import Category from '../categories/Category'
-import ListCategories from '../categories/List'
-
-import ListPosts from '../posts/List'
 
 import {
   getCategories,
   getPosts
 } from '../../actions'
 
+/* Pages */
+import Header from '../shared/Header'
+import Footer from '../shared/Footer'
 import MainPage from '../pages/Main'
 
 class App extends Component {
@@ -40,28 +40,26 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-
-          <ListCategories
-            categories={categories}
-          />
-
-          <Route exact path='/' render={() => (
-            <div>
-            <ListPosts
-              posts={posts}
-            />
-            </div>
-          )} />
-
-          <Route path={`/:category`} render={ ({match}) => (
-            <div>
-              <Category
-                category={match.params.category}
+          <div className="body-content">
+            <Header />
+            <Route exact path='/' render={() => (
+              <MainPage
+                categories={categories}
                 posts={posts}
               />
-            </div>
-          )} />
-
+            )} />
+            
+            <Route path={`/:category`} render={ ({match}) => (
+              <div>
+              <Category
+              category={match.params.category}
+              posts={posts}
+              />
+              </div>
+            )} />
+          </div>
+          
+          <Footer />
         </div>
       </Router>
     )

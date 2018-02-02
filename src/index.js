@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 /* Styles */
-import './index.css'
+import './assets/scss/main.scss'
 
 /* Components*/
 import App from './components/app/App'
