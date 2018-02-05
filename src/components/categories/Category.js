@@ -1,12 +1,21 @@
+/* React */
 import React from 'react'
+
+/* Router */
+import { Link } from 'react-router-dom'
+
+/* Prop Types */
 import PropTypes from 'prop-types'
 
 const Category = (props) => {
-  console.log(props)
+  const {
+    category, posts
+  } = props
 
+  
   return (
     <div>
-      <h1>Hello from signle category view</h1>
+      <Link to={`/`}>Go back to home</Link>
     </div>
   )
 }

@@ -14,12 +14,13 @@ const List = (props) => {
   } = props
 
   return ( 
-    <div className="list-categories">
-      <ol className="categories-list">
+    <div className="list-categories container">
+      <div className="section-title">All of our posts</div>
+      <ul className="categories-list">
         {categories.map(category => (
           <li key={category.path}><Link to={`/${category.path}`} >{category.name}</Link></li>
         ))}
-      </ol>
+      </ul>
     </div>
   )
 }

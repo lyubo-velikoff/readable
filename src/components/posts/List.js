@@ -15,7 +15,7 @@ const List = (props) => {
     <div className="list-posts">
       <ul className="posts-list container">
         {posts.map(post => (
-          <li key={post.id}><Link to={`${post.category}/${post.id}`} className="post">{post.title}</Link></li>
+          <li key={post.id} className="post"><Link to={`${post.category}/${post.id}`} className="post-link">{post.title}<span class="post-icon">&raquo;</span></Link></li>
         ))}
       </ul>
     </div>

@@ -21,6 +21,7 @@ import {
 import Header from '../shared/Header'
 import Footer from '../shared/Footer'
 import MainPage from '../pages/Main'
+import ViewPage from '../pages/View'
 
 class App extends Component {
   state = {
@@ -49,14 +50,28 @@ class App extends Component {
               />
             )} />
             
-            <Route path={`/:category`} render={ ({match}) => (
+            <Route exact path={`/:category`} render={ ({match}) => (
               <div>
-              <Category
-              category={match.params.category}
-              posts={posts}
-              />
+                <Category
+                  category={match.params.category}
+                  posts={posts}
+                />
               </div>
             )} />
+
+            <Route path={`/:category/:postId`} render={ ({match}) => {
+              const { postId } = match.params
+              const post = posts.find( (p) => p.id === postId )
+              if (!post) {
+                return (<p>No post found for post id ${postId}</p>)  
+              }
+              return (
+                <ViewPage 
+                  post={post}
+                />
+              )
+            }} />
+
           </div>
           
           <Footer />
