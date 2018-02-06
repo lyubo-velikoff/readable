@@ -31,6 +31,21 @@ export const fetchPostsByCategory = (category) =>
   .then(res => res.json())
   .then(data => data)
 
+export const fetchPost = (postId) =>
+  fetch(`${api}/posts/${postId}`, {
+    headers
+  })
+  .then(res => res.json())
+  .then(data => data)
+
+
+export const fetchCommentsByPost = (postId) =>
+  fetch(`${api}/posts/${postId}/comments`, {
+    headers
+  })
+  .then(res => res.json())
+  .then(data => data)
+
 // export const create = (body) =>
 //   fetch(`${api}/contacts`, {
 //     method: 'POST',

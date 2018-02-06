@@ -1,32 +1,72 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ListCategories from '../categories/List'
 import ListPosts from '../posts/List'
 
-const Main = (props) => {
-  // const {
-  //   categories, category, posts, post
-  // } = props
-  console.log(props)
-  const {
-    categories, posts
-  } = props
-  return (
-    <div className="main-page">
-      <ListCategories
-        categories={categories}
-      />
-      <ListPosts
-        posts={posts}
-      />
-    </div>
-  )
+/* Route */
+import { withRouter } from 'react-router-dom'
+
+/* Redux */
+import { connect } from 'react-redux'
+
+/* Actions */
+import {
+  getCategories,
+  getPosts
+} from '../../actions'
+
+
+class Main extends Component {
+  static propTypes = {
+    categories: PropTypes.array.isRequired,
+    posts: PropTypes.array.isRequired,
+  }
+
+  state = {
+    posts: [],
+    categories: []
+  }
+
+  componentDidMount() {
+    this.props.getAllCategories()
+    this.props.getAllPosts()
+  }
+
+  render() {
+
+    const {
+      categories, posts
+    } = this.props
+
+    return (
+      <div className="main-page">
+        <ListCategories
+          categories={categories}
+        />
+        <ListPosts
+          posts={posts}
+        />
+      </div>
+    )
+  }
 }
 
-Main.propTypes = {
-  categories: PropTypes.array.isRequired,
-  posts: PropTypes.array.isRequired,
+const mapStateToProps = (state) => {
+  return { ...state, }
 }
 
-export default Main
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllCategories(){
+      dispatch(getCategories())
+    },
+    getAllPosts(){
+      dispatch(getPosts())
+    },
+  }
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps) (Main)
+)

@@ -19,7 +19,7 @@ const View = (props) => {
 }
 
 View.propTypes = {
-  post: PropTypes.object.isRequired,
+  // post: PropTypes.object.isRequired,
 }
 
 export default View
