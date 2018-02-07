@@ -15,7 +15,7 @@ const App = () => {
       <div className="body-content">
         <Header />
         <Route exact path='/' component={MainPage} />
-        <Route exact path={`/:category`} component={Category} />
+        <Route exact path={`/:category`} component={MainPage} />
         <Route path={`/:category/:postId`} component={ViewPage} />
       </div>
       <Footer />

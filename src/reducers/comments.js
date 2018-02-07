@@ -5,7 +5,7 @@ import {
 export default (state = [], action) => {
   switch (action.type) {
     case RECEIVE_COMMENTS:
-      return [ ...state, ...action.comments ]
+      return action.comments
     default:
       return state
   }

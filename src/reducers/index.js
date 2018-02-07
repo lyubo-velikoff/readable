@@ -4,14 +4,16 @@ import {
   combineReducers
 } from 'redux'
 
-import CategoryReducer from './category'
+import CategoriesReducer from './categories'
 import PostReducer from './post'
-import CommentReducer from './comment'
+import PostsReducer from './posts'
+import CommentsReducer from './comments'
 
 /* Export all reducers */
 
 export default combineReducers({
-  categories: CategoryReducer,
-  posts: PostReducer,
-  comments: CommentReducer,
+  categories: CategoriesReducer,
+  posts: PostsReducer,
+  post: PostReducer,
+  comments: CommentsReducer,
 })

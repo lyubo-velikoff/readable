@@ -1,5 +1,5 @@
 /* React */
-import React, { Component } from 'react'
+import React from 'react'
 
 /* Router */
 import { Link } from 'react-router-dom'
@@ -10,67 +10,31 @@ import PropTypes from 'prop-types'
 /* Time library */
 import Time from 'react-time'
 
-/* Route */
-import { withRouter } from 'react-router-dom'
+const Single = (props) => {
 
-/* Redux */
-import { connect } from 'react-redux'
-
-/* Actions */
-import {
-  getPost
-} from '../../actions'
-
-class Single extends Component {
-  static propTypes = {
-    post: PropTypes.array,
-  }
-
-  state = {
-    post: []
-  }
-
-  componentDidMount() {
-    this.props.getSinglePost(this.props.match.params.postId)
-  }
-
-  render() {
-    const {
-      posts
-    } = this.props
-
-    const post = posts[0] || false
-
-    return (
-      <div className="view-post container">
-        {post && (
-          <div className="single-post">
-            <div className="title">{post.title}</div>
-            <div className="body">{post.body}</div>
-            <div className="author">{post.author}</div>
-            <div className="date"><Time value={post.timestamp} format="YYYY/MM/DD" /></div>
-            <div className="score">{post.voteScore}</div>
-            <Link to={`/`}>Go back to all posts</Link>
-          </div>
-        )}
-      </div>
-    )
-  }
+  const {
+    post
+  } = props
+  
+  return (
+    <div className="view-post container">
+      {post.id && (
+        <div className="single-post">
+          <div className="title">{post.title}</div>
+          <div className="body">{post.body}</div>
+          <div className="author">{post.author}</div>
+          <div className="date"><Time value={post.timestamp} format="YYYY/MM/DD" /></div>
+          <div className="score">{post.voteScore}</div>
+          <Link to={`/`}>Go back to all posts</Link>
+        </div>
+      )}
+    </div>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return { ...state }
+
+Single.propTypes = {
+  post: PropTypes.object.isRequired,
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getSinglePost(postId){
-      dispatch(getPost(postId))
-    },
-  }
-}
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps) (Single)
-)
-
+export default Single

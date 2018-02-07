@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 /* Actions */
 import {
   getCategories,
-  getPosts
+  getPosts,
 } from '../../actions'
 
 
@@ -25,19 +25,17 @@ class Main extends Component {
 
   state = {
     posts: [],
-    categories: []
+    categories: [],
   }
 
   componentDidMount() {
-    this.props.getAllCategories()
-    this.props.getAllPosts()
+    const { getAllCategories, getAllPosts, } = this.props
+    getAllPosts()
+    getAllCategories()
   }
 
   render() {
-
-    const {
-      categories, posts
-    } = this.props
+    const { categories, posts } = this.props
 
     return (
       <div className="main-page">
@@ -52,8 +50,17 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { ...state, }
+const mapStateToProps = ({ categories, posts }, { match }) => {
+  const { category } = match.params
+  
+  if (category && posts) {
+    posts = posts.filter(post => post.category === category)
+  }
+
+  return {
+    categories: categories,
+    posts: posts
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -17,6 +17,7 @@ const List = (props) => {
     <div className="list-categories container">
       <div className="section-title">All of our posts</div>
       <ul className="categories-list">
+        <li key="all"><Link to="/" >All</Link></li>
         {categories.map(category => (
           <li key={category.path}><Link to={`/${category.path}`} >{category.name}</Link></li>
         ))}
