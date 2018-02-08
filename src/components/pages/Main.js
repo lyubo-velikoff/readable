@@ -5,10 +5,13 @@ import ListCategories from '../categories/List'
 import ListPosts from '../posts/List'
 
 /* Route */
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 /* Redux */
 import { connect } from 'react-redux'
+
+/* Sort by */
+import sortBy from 'sort-by'
 
 /* Actions */
 import {
@@ -34,17 +37,35 @@ class Main extends Component {
     getAllCategories()
   }
 
+  sortPosts(e) {
+    // const { posts } = this.props
+    // posts.sort(sortBy(attribute))
+    console.log('hereasd', e)
+  }
+
   render() {
-    const { categories, posts } = this.props
+    const { categories, posts, history } = this.props
+    const categoryParam = this.props.match.params.category
 
     return (
       <div className="main-page">
         <ListCategories
           categories={categories}
+          category={categoryParam}
+          handleCategoryChange={(e) => history.push(`/${e.target.value}`)}
         />
+
+        <div className="container sort-by">
+          Sort by:
+          <span value="voteScore" onClick={this.sortPosts}>Score</span>
+        </div>
+
         <ListPosts
           posts={posts}
         />
+        <div className="add-new-container">
+          <Link to="/new" className="add-new-button"><span>+</span></Link>
+        </div>
       </div>
     )
   }

@@ -9,19 +9,18 @@ import PropTypes from 'prop-types'
 
 const List = (props) => {
 
-  const {
-    categories
-  } = props
+  const { categories, category, handleCategoryChange } = props
 
   return ( 
     <div className="list-categories container">
       <div className="section-title">All of our posts</div>
-      <ul className="categories-list">
-        <li key="all"><Link to="/" >All</Link></li>
+      Filter by category &nbsp;
+      <select value={category} className="categories-list" onChange={handleCategoryChange}>
+        <option key="" value="">All</option>
         {categories.map(category => (
-          <li key={category.path}><Link to={`/${category.path}`} >{category.name}</Link></li>
+          <option key={category.path} value={category.path}>{category.name}</option>
         ))}
-      </ul>
+      </select>
     </div>
   )
 }

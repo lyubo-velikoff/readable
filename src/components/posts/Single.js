@@ -22,10 +22,11 @@ const Single = (props) => {
         <div className="single-post">
           <div className="title">{post.title}</div>
           <div className="body">{post.body}</div>
-          <div className="author">{post.author}</div>
-          <div className="date"><Time value={post.timestamp} format="YYYY/MM/DD" /></div>
-          <div className="score">{post.voteScore}</div>
-          <Link to={`/`}>Go back to all posts</Link>
+          <div className="author-date">Written by {post.author} on <Time value={post.timestamp} format="YYYY/MM/DD" /></div>
+          <div className="score">Score: {post.voteScore}</div>
+          <div>
+            <Link to={`/`} class="home-button">Go back to all posts</Link>
+          </div>
         </div>
       )}
     </div>
