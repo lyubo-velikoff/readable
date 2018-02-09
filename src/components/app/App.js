@@ -16,9 +16,10 @@ const App = () => {
       <div className="body-content">
         <Header />
         <Route exact path='/' component={MainPage} />
-        <Route exact path={`/:category`} component={MainPage} />
-        <Route path={`/:category/:postId`} component={ViewPage} />
-        <Route exact path='/new' component={CreatePage} />
+        <Route path='/new' component={CreatePage} />
+        <Route exact path={`/posts`} component={MainPage} />
+        <Route exact path={`/posts/:category`} component={MainPage} />
+        <Route exact path={`/posts/:category/:postId`} component={ViewPage} />
       </div>
       <Footer />
     </div>

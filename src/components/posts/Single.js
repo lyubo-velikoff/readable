@@ -25,7 +25,7 @@ const Single = (props) => {
           <div className="author-date">Written by {post.author} on <Time value={post.timestamp} format="YYYY/MM/DD" /></div>
           <div className="score">Score: {post.voteScore}</div>
           <div>
-            <Link to={`/`} class="home-button">Go back to all posts</Link>
+            <Link to="/" className="home-button">Go back to all posts</Link>
           </div>
         </div>
       )}

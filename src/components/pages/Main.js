@@ -52,7 +52,7 @@ class Main extends Component {
         <ListCategories
           categories={categories}
           category={categoryParam}
-          handleCategoryChange={(e) => history.push(`/${e.target.value}`)}
+          handleCategoryChange={(e) => history.push(`/posts/${e.target.value}`)}
         />
 
         <div className="container sort-by">

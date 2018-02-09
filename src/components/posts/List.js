@@ -19,7 +19,7 @@ const List = (props) => {
       <ul className="posts-list container">
         {posts.map(post => (
           <li key={post.id} className="post">
-            <Link to={`${post.category}/${post.id}`} className="post-link">
+            <Link to={`/posts/${post.category}/${post.id}`} className="post-link">
               {post.title}
               <span className="post-date"><Time value={post.timestamp} format="YYYY/MM/DD" /></span>
               <span className="post-score">Score: {post.voteScore}</span>

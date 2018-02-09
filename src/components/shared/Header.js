@@ -1,9 +1,13 @@
+/* React */
 import React from 'react'
+
+/* Link */
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
     <div className="header">
-      Readable
+      <Link to="/">Readable</Link>
     </div>
   )
 }
