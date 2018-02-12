@@ -12,7 +12,8 @@ import { connect } from 'react-redux'
 
 /* Actions */
 import {
-  getPost
+  getPost,
+  getComments
 } from '../../actions'
 
 /* Components */
@@ -30,18 +31,17 @@ class View extends Component {
   componentDidMount() {
     const { postId } = this.props.match.params
     this.props.getSinglePost(postId)
+    this.props.getPostComments(postId)
   }
 
   render() {
-    const {
-      post
-    } = this.props
+    const { post, comments } = this.props
     const { postId } = this.props.match.params
 
     return (
       <div className="view-page">
         {post.id ? (
-          <ViewPost post={post} />
+          <ViewPost post={post} comments={comments} />
         ) : (
           <div className="no-post container">
             Post id: {postId} does not exists
@@ -61,6 +61,9 @@ const mapDispatchToProps = (dispatch) => {
     getSinglePost(postId){
       dispatch(getPost(postId))
     },
+    getPostComments(postId) {
+      dispatch(getComments(postId))
+    }
   }
 }
 

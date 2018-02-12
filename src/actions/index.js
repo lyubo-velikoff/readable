@@ -6,6 +6,7 @@ import {
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
   RECEIVE_POST,
+  RECEIVE_COMMENTS
 } from './types'
 
 /* Categories */
@@ -56,7 +57,7 @@ export const getPost = (postId) => (dispatch) => {
 /* Comments */
 
 const receiveComments = (comments) => ({
-  type: RECEIVE_POSTS,
+  type: RECEIVE_COMMENTS,
   comments
 })
 
