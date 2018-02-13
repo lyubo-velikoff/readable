@@ -11,7 +11,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 /* Sort by */
-// import sortBy from 'sort-by'
+import sortBy from 'sort-by'
 
 /* Actions */
 import {
@@ -24,11 +24,15 @@ class Main extends Component {
   static propTypes = {
     categories: PropTypes.array.isRequired,
     posts: PropTypes.array.isRequired,
+    sort: PropTypes.string,
+    order: PropTypes.string,
   }
 
   state = {
     posts: [],
     categories: [],
+    sort: 'voteScore',
+    order: '-',
   }
 
   componentDidMount() {
@@ -37,15 +41,19 @@ class Main extends Component {
     getAllCategories()
   }
 
-  sortPosts(e) {
-    // const { posts } = this.props
-    // posts.sort(sortBy(attribute))
-    console.log('hereasd', e)
+  sortPosts = field => event => {
+    this.setState({
+      'sort': field,
+      'order': this.state.order === '-' ? '' : '-'
+    })
   }
 
   render() {
     const { categories, posts, history } = this.props
     const categoryParam = this.props.match.params.category
+    const { sort, order } = this.state
+    const orderBy = order + sort
+    const postsToDisplay = posts.sort(sortBy(orderBy))
 
     return (
       <div className="main-page">
@@ -60,13 +68,19 @@ class Main extends Component {
           />
         </div>
 
-        <div className="container sort-by">
-          Sort by:
-          <span value="voteScore" onClick={this.sortPosts}>Score</span>
+        <div className="container sort-by mt20">
+          Sort by:&nbsp;
+          <span onClick={this.sortPosts('voteScore')} className="ml20">Score</span>
+          <span onClick={this.sortPosts('timestamp')} className="ml20">Time</span>
+          {sort && (
+            <div className="mt20">
+              Order: {order === '' ? 'ascending' : 'descending'}
+            </div>
+          )}
         </div>
 
         <ListPosts
-          posts={posts}
+          posts={postsToDisplay}
         />
         <div className="add-new-container">
           <Link to="/new" className="add-new-button"><span>+</span></Link>
@@ -85,7 +99,7 @@ const mapStateToProps = ({ categories, posts }, { match }) => {
 
   return {
     categories: categories,
-    posts: posts
+    posts: posts,
   }
 }
 
