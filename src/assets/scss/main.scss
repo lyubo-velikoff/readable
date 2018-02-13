@@ -175,7 +175,7 @@ body {
   height: 40px;
 }
 
-.home-button {
+.button {
   background-color: $midGray;
   border: none;
   color: white;
@@ -231,5 +231,31 @@ body {
   background-color: white;
   .comment {
     margin-top: 30px;
+  }
+}
+
+/* Create Page */
+
+.create-page {
+  background-color: white;
+  margin-top: 30px;
+  padding: 20px;
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+  }
+  input[type="text"],
+  textarea {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 7px;
+    font-weight: 400;
+  }
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    max-width: 400px;
   }
 }

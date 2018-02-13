@@ -11,7 +11,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 /* Sort by */
-import sortBy from 'sort-by'
+// import sortBy from 'sort-by'
 
 /* Actions */
 import {
@@ -49,11 +49,16 @@ class Main extends Component {
 
     return (
       <div className="main-page">
-        <ListCategories
-          categories={categories}
-          category={categoryParam}
-          handleCategoryChange={(e) => history.push(`/posts/${e.target.value}`)}
-        />
+        <div className="container">
+          <div className="section-title">All of our posts</div>
+          Filter by category &nbsp;
+          <ListCategories
+            categories={categories}
+            category={categoryParam}
+            showAll={true}
+            handleCategoryChange={(e) => history.push(`/posts/${e.target.value}`)}
+          />
+        </div>
 
         <div className="container sort-by">
           Sort by:

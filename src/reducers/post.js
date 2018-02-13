@@ -1,5 +1,5 @@
 import { 
-  RECEIVE_POST
+  RECEIVE_POST,
 } from '../actions/types'
 
 export default (state = {}, action) => {

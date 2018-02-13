@@ -58,12 +58,14 @@ export const fetchCommentsByPost = (postId) =>
   .then(res => res.json())
   .then(data => data)
 
-// export const create = (body) =>
-//   fetch(`${api}/contacts`, {
-//     method: 'POST',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(body)
-//   }).then(res => res.json())
+export const insertPost = (body) =>
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+  .then(handleErrors)
+  .then(res => res.json())

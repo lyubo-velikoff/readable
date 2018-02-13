@@ -30,7 +30,7 @@ const Single = (props) => {
           <div className="post-comments">
             Comments
             {comments.map(comment => (
-              <div className="comment">
+              <div className="comment" key={comment.id}>
                 <div className="title">{comment.author}</div>
                 <div className="body">{comment.body}</div>
                 <div className="score">Score: {comment.voteScore}</div>
@@ -38,7 +38,7 @@ const Single = (props) => {
             ))}
           </div>
           <div className="mt30">
-            <Link to="/" className="home-button">Go back to all posts</Link>
+            <Link to="/" className="button">Go back to all posts</Link>
           </div>
         </div>
       )}

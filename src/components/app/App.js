@@ -3,7 +3,6 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 /* Components */
-import Category from '../categories/Category'
 import Header from '../shared/Header'
 import Footer from '../shared/Footer'
 import MainPage from '../pages/Main'
