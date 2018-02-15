@@ -31,7 +31,6 @@ class Add extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props
     return (
       <div className="add-comment">
         Add comment

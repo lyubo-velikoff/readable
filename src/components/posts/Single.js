@@ -18,6 +18,9 @@ const Single = (props) => {
 
   return (
     <div className="view-post container">
+      <div className="mt30">
+        <Link to="/" className="button">Go back to all posts</Link>
+      </div>
       {post.id && (
         <div className="post-exists">
           <div className="single-post">
@@ -30,9 +33,6 @@ const Single = (props) => {
 
           <PostComments comments={comments} handleAddComment={handleAddComment} />
 
-          <div className="mt30">
-            <Link to="/" className="button">Go back to all posts</Link>
-          </div>
         </div>
       )}
     </div>

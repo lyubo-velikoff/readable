@@ -10,6 +10,9 @@ import { withRouter } from 'react-router-dom'
 /* Redux */
 import { connect } from 'react-redux'
 
+/* Router */
+import { Link } from 'react-router-dom'
+
 /* UUID */
 import { v4 } from 'uuid'
 
@@ -67,35 +70,39 @@ class Create extends Component {
     const { categories } = this.props
 
     return (
-      <div className="create-page container">
-        <form onSubmit={this.handleSubmit}>
-          
-          <label>
-            Title
-            <input id="title" name ="title" type="text" value={this.state.title} onChange={this.handleChange('title')} />
-          </label>
+      <div>
+        <div className="container mt30">
+          <Link to="/" className="button">Go back to all posts</Link>
+        </div>
+        <div className="create-page container">
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Title
+              <input id="title" name ="title" type="text" value={this.state.title} onChange={this.handleChange('title')} />
+            </label>
 
-          <label>
-            Body
-            <textarea id="body" name ="body" type="text" value={this.state.body} onChange={this.handleChange('body')} />
-          </label>
+            <label>
+              Body
+              <textarea id="body" name ="body" type="text" value={this.state.body} onChange={this.handleChange('body')} />
+            </label>
 
-          <label>
-            Author
-            <input id="author" name ="author" type="text" value={this.state.author} onChange={this.handleChange('author')} />
-          </label>
+            <label>
+              Author
+              <input id="author" name ="author" type="text" value={this.state.author} onChange={this.handleChange('author')} />
+            </label>
 
-          <ListCategories
-            categories={categories}
-            category={this.state.category}
-            showAll={false}
-            handleCategoryChange={this.handleChange('category')}
-          />
+            <ListCategories
+              categories={categories}
+              category={this.state.category}
+              showAll={false}
+              handleCategoryChange={this.handleChange('category')}
+            />
 
-          <div className="mt20">
-            <input type="submit" value="Submit" className="button"/>
-          </div>
-        </form>
+            <div className="mt20">
+              <input type="submit" value="Submit" className="button"/>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }
