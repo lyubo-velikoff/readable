@@ -10,9 +10,6 @@ import { withRouter } from 'react-router-dom'
 /* Redux */
 import { connect } from 'react-redux'
 
-/* Router */
-import { Link } from 'react-router-dom'
-
 /* UUID */
 import { v4 } from 'uuid'
 
@@ -23,6 +20,7 @@ import {
 } from '../../actions'
 
 import ListCategories from '../categories/List'
+import GoBack from '../helpers/GoBack'
 
 class Create extends Component {
 
@@ -71,9 +69,7 @@ class Create extends Component {
 
     return (
       <div>
-        <div className="container mt30">
-          <Link to="/" className="button">Go back to all posts</Link>
-        </div>
+        <GoBack additionalClasses="container" />
         <div className="create-page container">
           <form onSubmit={this.handleSubmit}>
             <label>

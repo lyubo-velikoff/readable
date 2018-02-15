@@ -1,9 +1,6 @@
 /* React */
 import React from 'react'
 
-/* Router */
-import { Link } from 'react-router-dom'
-
 /* Prop Types */
 import PropTypes from 'prop-types'
 
@@ -12,15 +9,14 @@ import Time from 'react-time'
 
 /* Components */
 import PostComments from '../comments/List'
+import GoBack from '../helpers/GoBack'
 
 const Single = (props) => {
   const { post, comments, handleAddComment } = props
 
   return (
     <div className="view-post container">
-      <div className="mt30">
-        <Link to="/" className="button">Go back to all posts</Link>
-      </div>
+      <GoBack />
       {post.id && (
         <div className="post-exists">
           <div className="single-post">
