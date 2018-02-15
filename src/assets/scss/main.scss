@@ -263,3 +263,16 @@ body {
     max-width: 400px;
   }
 }
+
+/* Sort by */
+
+.sort-by {
+  span {
+    cursor: pointer;
+    margin-left: 20px;
+    &.active {
+      color: $purple;
+      font-weight: 600;
+    }
+  }
+}

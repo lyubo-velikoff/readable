@@ -19,7 +19,6 @@ import {
   getCategories
 } from '../../actions'
 
-
 import ListCategories from '../categories/List'
 
 class Create extends Component {
@@ -51,9 +50,6 @@ class Create extends Component {
 
     event.preventDefault()
 
-    console.log(this.state)
-    console.log('v4', v4())
-    console.log('date', Date.now())
     insertPost({
       ...this.state,
       'id': v4(),

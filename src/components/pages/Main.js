@@ -54,7 +54,7 @@ class Main extends Component {
     const { sort, order } = this.state
     const orderBy = order + sort
     const postsToDisplay = posts.sort(sortBy(orderBy))
-
+    console.log(sort)
     return (
       <div className="main-page">
         <div className="container">
@@ -70,8 +70,8 @@ class Main extends Component {
 
         <div className="container sort-by mt20">
           Sort by:&nbsp;
-          <span onClick={this.sortPosts('voteScore')} className="ml20">Score</span>
-          <span onClick={this.sortPosts('timestamp')} className="ml20">Time</span>
+          <span onClick={this.sortPosts('voteScore')} className={sort && sort === 'voteScore' ? 'active' : ''}>Score</span>
+          <span onClick={this.sortPosts('timestamp')} className={sort && sort === 'timestamp' ? 'active' : ''}>Time</span>
           {sort && (
             <div className="mt20">
               Order: {order === '' ? 'ascending' : 'descending'}

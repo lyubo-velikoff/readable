@@ -11,11 +11,8 @@ import PropTypes from 'prop-types'
 import Time from 'react-time'
 
 const Single = (props) => {
+  const { post, comments } = props
 
-  const {
-    post, comments
-  } = props
-  
   return (
     <div className="view-post container">
       {post.id && (
@@ -28,7 +25,7 @@ const Single = (props) => {
             <div className="score">Score: {post.voteScore}</div>
           </div>
           <div className="post-comments">
-            Comments
+            Comments: {comments.length}
             {comments.map(comment => (
               <div className="comment" key={comment.id}>
                 <div className="title">{comment.author}</div>
