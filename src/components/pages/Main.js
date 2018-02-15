@@ -19,6 +19,8 @@ import {
   getPosts,
 } from '../../actions'
 
+/* Helpers */
+import SortOptions from '../helpers/SortOptions'
 
 class Main extends Component {
   static propTypes = {
@@ -33,6 +35,16 @@ class Main extends Component {
     categories: [],
     sort: 'voteScore',
     order: '-',
+    sortOptions: [
+      {
+      'label': 'Score',
+      'field': 'voteScore'
+      },
+      {
+        'label': 'Time',
+        'field': 'timestamp'
+        },
+    ]
   }
 
   componentDidMount() {
@@ -51,15 +63,15 @@ class Main extends Component {
   render() {
     const { categories, posts, history } = this.props
     const categoryParam = this.props.match.params.category
-    const { sort, order } = this.state
+    const { sort, order, sortOptions } = this.state
     const orderBy = order + sort
     const postsToDisplay = posts.sort(sortBy(orderBy))
-    console.log(sort)
+    
     return (
       <div className="main-page">
         <div className="container">
           <div className="section-title">All of our posts</div>
-          Filter by category &nbsp;
+          <p>Filter by category &nbsp;</p>
           <ListCategories
             categories={categories}
             category={categoryParam}
@@ -68,16 +80,12 @@ class Main extends Component {
           />
         </div>
 
-        <div className="container sort-by mt20">
-          Sort by:&nbsp;
-          <span onClick={this.sortPosts('voteScore')} className={sort && sort === 'voteScore' ? 'active' : ''}>Score</span>
-          <span onClick={this.sortPosts('timestamp')} className={sort && sort === 'timestamp' ? 'active' : ''}>Time</span>
-          {sort && (
-            <div className="mt20">
-              Order: {order === '' ? 'ascending' : 'descending'}
-            </div>
-          )}
-        </div>
+        <SortOptions 
+          options={sortOptions}
+          sort={sort}
+          order={order}
+          sortPostsHandle={this.sortPosts}
+        />
 
         <ListPosts
           posts={postsToDisplay}
