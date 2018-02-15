@@ -8,6 +8,7 @@ import {
   RECEIVE_POST,
   RECEIVE_COMMENTS,
   SEND_POST,
+  ADD_COMMENT,
 } from './types'
 
 /* Categories */
@@ -80,6 +81,19 @@ export const getComments = (postId) => (dispatch) => {
   ReadableAPI.fetchCommentsByPost(postId)
     .then(data => {
       dispatch(receiveComments(data))
+    })
+    .catch(err => console.error(err))
+}
+
+const sendComment = (comment) => ({
+  type: ADD_COMMENT,
+  comment
+})
+
+export const addComment = (comment) => (dispatch) => {
+  ReadableAPI.insertComment(comment)
+    .then(data => {
+      dispatch(sendComment(data))
     })
     .catch(err => console.error(err))
 }

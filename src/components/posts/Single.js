@@ -10,8 +10,11 @@ import PropTypes from 'prop-types'
 /* Time library */
 import Time from 'react-time'
 
+/* Components */
+import PostComments from '../comments/List'
+
 const Single = (props) => {
-  const { post, comments } = props
+  const { post, comments, handleAddComment } = props
 
   return (
     <div className="view-post container">
@@ -24,16 +27,9 @@ const Single = (props) => {
             <div className="author-date">Written by {post.author} on <Time value={post.timestamp} format="YYYY/MM/DD" /></div>
             <div className="score">Score: {post.voteScore}</div>
           </div>
-          <div className="post-comments">
-            Comments: {comments.length}
-            {comments.map(comment => (
-              <div className="comment" key={comment.id}>
-                <div className="title">{comment.author}</div>
-                <div className="body">{comment.body}</div>
-                <div className="score">Score: {comment.voteScore}</div>
-              </div>
-            ))}
-          </div>
+
+          <PostComments comments={comments} handleAddComment={handleAddComment} />
+
           <div className="mt30">
             <Link to="/" className="button">Go back to all posts</Link>
           </div>
@@ -47,6 +43,7 @@ const Single = (props) => {
 Single.propTypes = {
   post: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
+  handleAddComment: PropTypes.func.isRequired,
 }
 
 export default Single

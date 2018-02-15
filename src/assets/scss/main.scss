@@ -158,6 +158,10 @@ body {
     color: $green;
     font-weight: 600;
   }
+
+  .add-comment {
+    padding-bottom: 30px;
+  }
 }
 
 .no-post {
@@ -244,6 +248,9 @@ body {
   background-color: white;
   margin-top: 30px;
   padding: 20px;
+}
+
+form {
   label {
     font-size: 16px;
     font-weight: 600;
