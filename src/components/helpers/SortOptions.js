@@ -11,7 +11,7 @@ const SortOptions = (props) => {
     <div className="container sort-by mt30">
       Sort by:&nbsp;
       {options.map(option => (
-        <span onClick={sortPostsHandle(option.field)} className={sort && sort === option.field ? 'active' : ''}>
+        <span key={option.field} onClick={sortPostsHandle(option.field)} className={sort && sort === option.field ? 'active' : ''}>
           {option.label} {sort && sort === option.field && (
             <span>({order === '' ? 'ascending' : 'descending'})</span>
           )}
