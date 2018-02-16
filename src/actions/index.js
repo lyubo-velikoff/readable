@@ -9,7 +9,9 @@ import {
   RECEIVE_COMMENTS,
   SEND_POST,
   EDIT_POST,
+  DELETE_POST,
   ADD_COMMENT,
+  DELETE_COMMENT,
 } from './types'
 
 /* Categories */
@@ -83,6 +85,19 @@ export const editPost = (id, post) => (dispatch) => (
     .catch(err => console.error(err))
 )
 
+const removePost = (post) => ({
+  type: DELETE_POST,
+  post
+})
+
+export const deletePost = (id) => (dispatch) => (
+  ReadableAPI.deletePost(id)
+    .then(data => {
+      dispatch(removePost(data))
+    })
+    .catch(err => console.error(err))
+)
+
 /* Comments */
 
 const receiveComments = (comments) => ({
@@ -110,3 +125,16 @@ export const addComment = (comment) => (dispatch) => {
     })
     .catch(err => console.error(err))
 }
+
+const removeComment = (comment) => ({
+  type: DELETE_COMMENT,
+  comment
+})
+
+export const deleteComment = (id) => (dispatch) => (
+  ReadableAPI.deleteComment(id)
+    .then(data => {
+      dispatch(removeComment(data))
+    })
+    .catch(err => console.error(err))
+)

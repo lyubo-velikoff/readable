@@ -4,8 +4,11 @@ import React from 'react'
 /* Prop Types */
 import PropTypes from 'prop-types'
 
+/* Router */
+import { Link } from 'react-router-dom'
+
 const List = (props) => {
-  const { comments } = props
+  const { comments, deleteCommentHandle } = props
   return (
     <div className="post-comments">
       Comments: {comments.length}
@@ -14,6 +17,10 @@ const List = (props) => {
           <div className="title">{comment.author}</div>
           <div className="body">{comment.body}</div>
           <div className="score">Score: {comment.voteScore}</div>
+          <div className="mt20">
+            <Link to={`/edit/comment/${comment.id}`} className="edit">Edit</Link>
+            <Link to="#" onClick={(event) => deleteCommentHandle(event, comment.id)} className="delete">Delete</Link>          
+          </div>
         </div>
       ))}
     </div>
@@ -22,6 +29,7 @@ const List = (props) => {
 
 List.propTypes = {
   comments: PropTypes.array.isRequired,
+  deleteCommentHandle: PropTypes.func.isRequired,
 }
 
 export default List

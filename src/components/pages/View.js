@@ -15,6 +15,8 @@ import {
   getPost,
   getComments,
   addComment,
+  deletePost,
+  deleteComment,
 } from '../../actions'
 
 /* UUID */
@@ -50,7 +52,32 @@ class View extends Component {
       'parentId': postId,
       'timestamp': Date.now()
     })
-    
+
+  }
+
+  redirect = (path) => {
+    const { history } = this.props
+    history.push(path)
+  }
+
+  onPostDelete = (event, id) => {
+    event.preventDefault()
+    const { removePost } = this.props
+
+    if(window.confirm('Are you sure?')) {
+      removePost(id).then(() => {
+        this.redirect('/')
+      })
+    }
+  }
+
+  onCommentDelete = (event, id) => {
+    event.preventDefault()
+    const { removeComment } = this.props
+
+    if(window.confirm('Are you sure?')) {
+      removeComment(id)
+    }
   }
 
   render() {
@@ -59,11 +86,14 @@ class View extends Component {
 
     return (
       <div className="view-page">
+
         {post.id ? (
           <ViewPost 
             post={post} 
             comments={comments}
-            handleAddComment={this.handleAddComment} 
+            handleAddComment={this.handleAddComment}
+            deletePostHandle={this.onPostDelete}
+            deleteCommentHandle={this.onCommentDelete}
           />
         ) : (
           <div className="no-post container">
@@ -81,15 +111,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSinglePost(postId){
-      dispatch(getPost(postId))
-    },
-    getPostComments(postId) {
-      dispatch(getComments(postId))
-    },
-    insertComment(comment) {
-      dispatch(addComment(comment))
-    },
+    getSinglePost: (postId) => dispatch(getPost(postId)),
+    getPostComments: (postId) => dispatch(getComments(postId)),
+    insertComment: (comment) => dispatch(addComment(comment)),
+    removePost: (post) => dispatch(deletePost(post)),
+    removeComment: (comment) => dispatch(deleteComment(comment)),
   }
 }
 

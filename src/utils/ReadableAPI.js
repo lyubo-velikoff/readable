@@ -93,4 +93,28 @@ export const editPost = (id, body) =>
     body: JSON.stringify(body)
   })
   .then(handleErrors)
+  .then(res => res.json())
+
+export const deletePost = (id) => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(handleErrors)
   .then(res => res.json()) 
+}
+
+export const deleteComment = (id) => {
+  return fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(handleErrors)
+  .then(res => res.json()) 
+}

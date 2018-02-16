@@ -11,7 +11,7 @@ import Time from 'react-time'
 import { Link } from 'react-router-dom'
 
 const Post = (props) => {
-  const { post } = props
+  const { post, deletePostHandle } = props
   return (
     <div className="single-post">
       Post details
@@ -20,7 +20,8 @@ const Post = (props) => {
       <div className="author-date">Written by {post.author} on <Time value={post.timestamp} format="YYYY/MM/DD" /></div>
       <div className="score">Score: {post.voteScore}</div>
       <div className="mt20">
-        <Link to={`/edit/post/${post.id}`} className="edit">Edit post</Link>  
+        <Link to={`/edit/post/${post.id}`} className="edit">Edit post</Link>
+        <Link to="#" onClick={(event) => deletePostHandle(event, post.id)} className="delete">Delete post</Link>          
       </div>
     </div>
   )
@@ -28,6 +29,7 @@ const Post = (props) => {
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
+  deletePostHandle: PropTypes.func.isRequired,
 }
 
 export default Post

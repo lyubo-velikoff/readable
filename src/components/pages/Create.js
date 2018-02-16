@@ -136,7 +136,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllCategories: () => dispatch(getCategories()),
     insertPost: (data) => dispatch(addPost(data)), 
     updatePost: (postId, data) => dispatch(editPost(postId, data)),
-  } 
+  }
 }
 
 export default withRouter(
