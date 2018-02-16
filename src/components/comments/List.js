@@ -4,14 +4,10 @@ import React from 'react'
 /* Prop Types */
 import PropTypes from 'prop-types'
 
-/* Components */
-import AddComment from './Add'
-
 const List = (props) => {
-  const { comments, handleAddComment } = props
+  const { comments } = props
   return (
     <div className="post-comments">
-      <AddComment handleAddComment={handleAddComment} />
       Comments: {comments.length}
       {comments.map(comment => (
         <div className="comment" key={comment.id}>
@@ -26,7 +22,6 @@ const List = (props) => {
 
 List.propTypes = {
   comments: PropTypes.array.isRequired,
-  handleAddComment: PropTypes.func.isRequired,
 }
 
 export default List
