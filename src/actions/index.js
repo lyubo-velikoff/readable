@@ -11,6 +11,8 @@ import {
   EDIT_POST,
   DELETE_POST,
   ADD_COMMENT,
+  EDIT_COMMENT,
+  GET_COMMENT,
   DELETE_COMMENT,
 } from './types'
 
@@ -125,6 +127,32 @@ export const addComment = (comment) => (dispatch) => {
     })
     .catch(err => console.error(err))
 }
+
+const receiveComment = (comment) => ({
+  type: GET_COMMENT,
+  comment
+})
+
+export const getComment = (commentId) => (dispatch) => (
+  ReadableAPI.fetchComment(commentId)
+    .then(data => {
+      dispatch(receiveComment(data))
+    })
+    .catch(err => console.error(err))
+)
+
+const updateComment = (comment) => ({
+  type: EDIT_COMMENT,
+  comment
+})
+
+export const editComment = (id, comment) => (dispatch) => (
+  ReadableAPI.editComment(id, comment)
+    .then(data => {
+      dispatch(updateComment(data))
+    })
+    .catch(err => console.error(err))
+)
 
 const removeComment = (comment) => ({
   type: DELETE_COMMENT,

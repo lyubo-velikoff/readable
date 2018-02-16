@@ -98,17 +98,17 @@ class CreateEitPost extends Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Title
-              <input id="title" name ="title" type="text" value={title} onChange={this.handleChange('title')} />
+              <input id="title" name ="title" type="text" value={title} onChange={this.handleChange('title')} required />
             </label>
 
             <label>
               Body
-              <textarea id="body" name ="body" type="text" value={body} onChange={this.handleChange('body')} />
+              <textarea id="body" name ="body" type="text" value={body} onChange={this.handleChange('body')} required />
             </label>
 
             <label>
               Author
-              <input id="author" name ="author" type="text" value={author} onChange={this.handleChange('author')} />
+              <input id="author" name ="author" type="text" value={author} onChange={this.handleChange('author')} required />
             </label>
 
             <ListCategories
