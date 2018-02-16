@@ -23,6 +23,7 @@ const List = (props) => {
               {post.title}
               <span className="post-date"><Time value={post.timestamp} format="YYYY/MM/DD" /></span>
               <span className="post-score">Score: {post.voteScore}</span>
+              <span className="post-comment-count">Comments: {post.commentCount}</span>
               <span className="post-icon">&raquo;</span>
             </Link>
           </li>
