@@ -71,8 +71,8 @@ export const insertComment = (body) =>
   .then(handleErrors)
   .then(res => res.json())
 
-export const insertPost = (body) =>
-  fetch(`${api}/posts`, {
+export const insertPost = (body) => {
+  return fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -82,6 +82,7 @@ export const insertPost = (body) =>
   })
   .then(handleErrors)
   .then(res => res.json())
+}
 
 export const editPost = (id, body) =>
   fetch(`${api}/posts/${id}`, {

@@ -91,7 +91,7 @@ class Main extends Component {
           posts={postsToDisplay}
         />
         <div className="add-new-container">
-          <Link to="/new" className="add-new-button"><span>+</span></Link>
+          <Link to="/new/post" className="add-new-button"><span>+</span></Link>
         </div>
       </div>
     )

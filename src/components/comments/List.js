@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const List = (props) => {
-  const { comments, deleteCommentHandle } = props
+  const { comments, deleteCommentHandle, postId } = props
   return (
     <div className="post-comments">
       Comments: {comments.length}
@@ -23,6 +23,9 @@ const List = (props) => {
           </div>
         </div>
       ))}
+      <div className="mt30">
+        <Link to={`/new/comment/${postId}`} className="button">New comment</Link>
+      </div>
     </div>
   )
 }

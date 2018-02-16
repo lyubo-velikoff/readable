@@ -24,7 +24,7 @@ import {
 import ListCategories from '../categories/List'
 import GoBack from '../helpers/GoBack'
 
-class Create extends Component {
+class CreateEitPost extends Component {
 
   static propTypes = {
     categories: PropTypes.array.isRequired,
@@ -87,12 +87,14 @@ class Create extends Component {
   }
 
   render() {
-    const { categories } = this.props
+    const { categories, post, history } = this.props
     const { title, body, author, category } = this.state
+    const { path } = this.props.match
+    const goBackPath = post && post.id && post.category && path !== '/new/post'  ? `/posts/${post.category}/${post.id}` : '/'
     return (
       <div>
-        <GoBack additionalClasses="container" />
-        <div className="create-page container">
+        <GoBack path={goBackPath} additionalClasses="container" />
+        <div className="create-edit-page create-edit-post-page container">
           <form onSubmit={this.handleSubmit}>
             <label>
               Title
@@ -140,5 +142,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps ) (Create)
+  connect(mapStateToProps, mapDispatchToProps ) (CreateEitPost)
 )

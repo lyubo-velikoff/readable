@@ -14,7 +14,6 @@ import { connect } from 'react-redux'
 import {
   getPost,
   getComments,
-  addComment,
   deletePost,
   deleteComment,
 } from '../../actions'
@@ -42,18 +41,6 @@ class View extends Component {
     this.props.getPostComments(postId)
   }
 
-  handleAddComment = comment => {
-    const { insertComment } = this.props
-    const { postId } = this.props.match.params
-
-    insertComment({
-      ...comment,
-      'id': v4(),
-      'parentId': postId,
-      'timestamp': Date.now()
-    })
-
-  }
 
   redirect = (path) => {
     const { history } = this.props
@@ -91,7 +78,6 @@ class View extends Component {
           <ViewPost 
             post={post} 
             comments={comments}
-            handleAddComment={this.handleAddComment}
             deletePostHandle={this.onPostDelete}
             deleteCommentHandle={this.onCommentDelete}
           />
@@ -113,7 +99,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getSinglePost: (postId) => dispatch(getPost(postId)),
     getPostComments: (postId) => dispatch(getComments(postId)),
-    insertComment: (comment) => dispatch(addComment(comment)),
     removePost: (post) => dispatch(deletePost(post)),
     removeComment: (comment) => dispatch(deleteComment(comment)),
   }
