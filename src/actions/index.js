@@ -8,6 +8,7 @@ import {
   RECEIVE_POST,
   RECEIVE_COMMENTS,
   SEND_POST,
+  EDIT_POST,
   ADD_COMMENT,
 } from './types'
 
@@ -48,27 +49,39 @@ const receivePost = (post) => ({
   post
 })
 
-export const getPost = (postId) => (dispatch) => {
+export const getPost = (postId) => (dispatch) => (
   ReadableAPI.fetchPost(postId)
     .then(data => {
       dispatch(receivePost(data))
     })
     .catch(err => console.error(err))
-}
+)
 
 const sendPost = (post) => ({
   type: SEND_POST,
   post
 })
 
-export const addPost = (post) => (dispatch) => {
+export const addPost = (post) => (dispatch) => (
   ReadableAPI.insertPost(post)
     .then(data => {
       dispatch(sendPost(data))
     })
     .catch(err => console.error(err))
-}
+)
 
+const updatePost = (post) => ({
+  type: EDIT_POST,
+  post
+})
+
+export const editPost = (id, post) => (dispatch) => (
+  ReadableAPI.editPost(id, post)
+    .then(data => {
+      dispatch(updatePost(data))
+    })
+    .catch(err => console.error(err))
+)
 
 /* Comments */
 

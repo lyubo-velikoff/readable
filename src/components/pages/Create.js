@@ -16,7 +16,9 @@ import { v4 } from 'uuid'
 /* Actions */
 import {
   addPost,
-  getCategories
+  getCategories,
+  getPost,
+  editPost,
 } from '../../actions'
 
 import ListCategories from '../categories/List'
@@ -26,6 +28,7 @@ class Create extends Component {
 
   static propTypes = {
     categories: PropTypes.array.isRequired,
+    post: PropTypes.object,
   }
 
   state = {
@@ -41,32 +44,51 @@ class Create extends Component {
     })
   }
 
-  redirect = () => {
+  redirect = (path) => {
     const { history } = this.props
-    history.push('/')
+    history.push(path)
   }
 
   handleSubmit = event => {
-    const { insertPost } = this.props
-
+    const { insertPost, updatePost } = this.props
+    const { id, category, title, body, author } = this.state
+    
     event.preventDefault()
 
-    insertPost({
-      ...this.state,
-      'id': v4(),
-      'timestamp': Date.now()
-    })
-    this.redirect()
+    if (id) {
+      // edit
+      updatePost(id, {
+        'title': title,
+        'body': body,
+        'author': author,
+        'category': category,
+      })
+      this.redirect(`/posts/${category}/${id}`)
+    } else {
+      // new
+      insertPost({
+        ...this.state,
+        'id': v4(),
+        'timestamp': Date.now()
+      })
+      this.redirect('/')
+    }
   }
-
+  
   componentDidMount() {
-    const { getAllCategories } = this.props
+    const { postId } = this.props.match.params
+    const { getSinglePost, getAllCategories } = this.props
     getAllCategories()
+    if (postId) {
+      getSinglePost(postId).then(() => {
+        this.setState({ ...this.props.post })
+      })
+    }
   }
 
   render() {
     const { categories } = this.props
-
+    const { title, body, author, category } = this.state
     return (
       <div>
         <GoBack additionalClasses="container" />
@@ -74,22 +96,22 @@ class Create extends Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Title
-              <input id="title" name ="title" type="text" value={this.state.title} onChange={this.handleChange('title')} />
+              <input id="title" name ="title" type="text" value={title} onChange={this.handleChange('title')} />
             </label>
 
             <label>
               Body
-              <textarea id="body" name ="body" type="text" value={this.state.body} onChange={this.handleChange('body')} />
+              <textarea id="body" name ="body" type="text" value={body} onChange={this.handleChange('body')} />
             </label>
 
             <label>
               Author
-              <input id="author" name ="author" type="text" value={this.state.author} onChange={this.handleChange('author')} />
+              <input id="author" name ="author" type="text" value={author} onChange={this.handleChange('author')} />
             </label>
 
             <ListCategories
               categories={categories}
-              category={this.state.category}
+              category={category}
               showAll={false}
               handleCategoryChange={this.handleChange('category')}
             />
@@ -109,16 +131,14 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { 
-    insertPost(post) {
-      dispatch(addPost(post))
-    },
-    getAllCategories(){
-      dispatch(getCategories())
-    },
-  }
+  return {
+    getSinglePost: (postId) => dispatch(getPost(postId)),
+    getAllCategories: () => dispatch(getCategories()),
+    insertPost: (data) => dispatch(addPost(data)), 
+    updatePost: (postId, data) => dispatch(editPost(postId, data)),
+  } 
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps) (Create)
+  connect(mapStateToProps, mapDispatchToProps ) (Create)
 )

@@ -29,9 +29,6 @@ const List = (props) => {
           </li>
         ))}
       </ul>
-      
-
-
     </div>
   )
 }

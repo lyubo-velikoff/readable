@@ -16,6 +16,7 @@ const App = () => {
         <Header />
         <Route exact path='/' component={MainPage} />
         <Route path='/new' component={CreatePage} />
+        <Route exact path='/edit/post/:postId' component={CreatePage} />
         <Route exact path={`/posts`} component={MainPage} />
         <Route exact path={`/posts/:category`} component={MainPage} />
         <Route exact path={`/posts/:category/:postId`} component={ViewPage} />

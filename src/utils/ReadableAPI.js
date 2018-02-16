@@ -42,13 +42,14 @@ export const fetchPosts = () =>
   .then(res => res.json())
   .then(data => data)
 
-export const fetchPost = (postId) => 
-  fetch(`${api}/posts/${postId}`, {
-    headers
-  })
-  .then(handleErrors)
-  .then(res => res.json())
-  .then(data => data)
+export const fetchPost = (postId) => {
+  return fetch(`${api}/posts/${postId}`, {
+      headers
+    })
+    .then(handleErrors)
+    .then(res => res.json())
+    .then(data => data)
+}
 
 export const fetchCommentsByPost = (postId) =>
   fetch(`${api}/posts/${postId}/comments`, {
@@ -81,3 +82,15 @@ export const insertPost = (body) =>
   })
   .then(handleErrors)
   .then(res => res.json())
+
+export const editPost = (id, body) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+  .then(handleErrors)
+  .then(res => res.json()) 
