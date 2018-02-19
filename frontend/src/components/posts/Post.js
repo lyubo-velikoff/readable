@@ -25,8 +25,8 @@ const Post = (props) => {
       <div className="score">Score: {post.voteScore}</div>
       <Vote type={post} voteHandle={votePostHandle}/>
       <div className="mt20">
-        <Link to={`/edit/post/${post.id}`} className="edit">Edit post</Link>
-        <Link to="#" onClick={(event) => deletePostHandle(event, post.id)} className="delete">Delete post</Link>          
+        <Link to={`/edit/post/${post.id}`} className="edit">Edit</Link>
+        <Link to="#" onClick={(event) => deletePostHandle(event, post.id)} className="delete">Delete</Link>          
       </div>
     </div>
   )

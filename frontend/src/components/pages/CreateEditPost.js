@@ -21,6 +21,7 @@ import {
   editPost,
 } from '../../actions'
 
+/* Components */
 import ListCategories from '../categories/List'
 import GoBack from '../helpers/GoBack'
 
@@ -87,7 +88,7 @@ class CreateEitPost extends Component {
   }
 
   render() {
-    const { categories, post, history } = this.props
+    const { categories, post } = this.props
     const { title, body, author, category } = this.state
     const { path } = this.props.match
     const goBackPath = post && post.id && post.category && path !== '/new/post'  ? `/posts/${post.category}/${post.id}` : '/'

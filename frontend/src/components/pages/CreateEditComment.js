@@ -21,7 +21,6 @@ import {
 } from '../../actions'
 
 /* Components*/
-import ListCategories from '../categories/List'
 import GoBack from '../helpers/GoBack'
 
 class CreateEditComment extends Component {
@@ -44,8 +43,8 @@ class CreateEditComment extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    const { insertComment, updateComment, history, post } = this.props
-    const { id, parentId, body, author } = this.state
+    const { insertComment, updateComment, post } = this.props
+    const { id, parentId, body } = this.state
     const { postId } = this.props.match.params
 
     if (id) {

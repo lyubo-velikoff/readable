@@ -27,7 +27,7 @@ body {
 }
 
 .mt30 {
-  margin-top: 30px;
+  margin-top: 30px !important;
 }
 
 .ml20 {
@@ -53,10 +53,6 @@ body {
     font-size: 30px;
     line-height: 40px;
     text-decoration: none;
-    transition-duration: 0.2s;
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 }
 
@@ -118,7 +114,7 @@ body {
           float: right;
           font-size: 40px;
           line-height: 44px;
-          margin-top: -75px;
+          margin-top: -50px;
           @media screen and (min-width: $mobile) {
             display: inline-block;
             padding-left: 5px;
@@ -217,6 +213,11 @@ body {
   background-color: white;
   .comment {
     margin-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $gray;
+    div {
+      margin-top: 20px;
+    }
   }
 }
 
@@ -229,21 +230,6 @@ body {
 .delete {
   margin-left: 20px;
   color: $red;
-}
-
-.vote {
-  position: relative;
-  z-index: 10;
-  margin-left: 30px;
-  font-size: 40px;
-  line-height: 40px;
-  &.vote-increase {
-    color: $darkGray;
-  }
-  &.vote-decrease {
-    color: $red;
-
-  }
 }
 
 .action-container {
@@ -264,6 +250,7 @@ body {
   font-size: 36px;
   position: relative;
   cursor: pointer;
+  transition-duration: 0.2s;
 
   span {
     position: absolute;
@@ -274,6 +261,21 @@ body {
     text-align: center;
     margin-top: -22px;
     color: #FFF;
+  }
+
+  &.vote-increase {
+    background: $green;
+  }
+  
+  &.vote-decrease {
+    background: $darkGray;
+    span {
+      top: 43%;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 

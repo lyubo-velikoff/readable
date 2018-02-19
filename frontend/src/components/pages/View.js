@@ -20,9 +20,6 @@ import {
   voteComment,
 } from '../../actions'
 
-/* UUID */
-import { v4 } from 'uuid'
-
 /* Components */
 import ViewPost from '../posts/Single'
 

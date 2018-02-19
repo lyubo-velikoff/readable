@@ -21,7 +21,7 @@ const List = (props) => {
           <div className="body">{comment.body}</div>
           <div className="score">Score: {comment.voteScore}</div>
           <Vote type={comment} voteHandle={voteCommentHandle} />
-          <div className="mt20">
+          <div className="mt30">
             <Link to={`/edit/comment/${comment.id}`} className="edit">Edit</Link>
             <Link to="#" onClick={(event) => deleteCommentHandle(event, comment.id)} className="delete">Delete</Link>          
           </div>
