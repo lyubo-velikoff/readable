@@ -37,6 +37,7 @@ class CreateEitPost extends Component {
     body: '',
     author: '',
     category: 'react',
+    isEdit: this.props.match.path.includes('new') ? false : true,
   }
 
   handleChange = fieldName => event => {
@@ -89,14 +90,15 @@ class CreateEitPost extends Component {
 
   render() {
     const { categories, post } = this.props
-    const { title, body, author, category } = this.state
+    const { title, body, author, category, isEdit } = this.state
     const { path } = this.props.match
     const goBackPath = post && post.id && post.category && path !== '/new/post'  ? `/posts/${post.category}/${post.id}` : '/'
     return (
       <div>
         <GoBack path={goBackPath} additionalClasses="container" />
         <div className="create-edit-page create-edit-post-page container">
-          <form onSubmit={this.handleSubmit}>
+          {isEdit ? 'Edit' : 'Add'} post
+          <form onSubmit={this.handleSubmit} className="mt30">
             <label>
               Title
               <input id="title" name ="title" type="text" value={title} onChange={this.handleChange('title')} required />
