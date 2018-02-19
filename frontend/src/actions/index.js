@@ -9,9 +9,11 @@ import {
   RECEIVE_COMMENTS,
   SEND_POST,
   EDIT_POST,
+  VOTE_POST,
   DELETE_POST,
   ADD_COMMENT,
   EDIT_COMMENT,
+  VOTE_COMMENT,
   GET_COMMENT,
   DELETE_COMMENT,
 } from './types'
@@ -83,6 +85,19 @@ export const editPost = (id, post) => (dispatch) => (
   ReadableAPI.editPost(id, post)
     .then(data => {
       dispatch(updatePost(data))
+    })
+    .catch(err => console.error(err))
+)
+
+const sendPostVote = (post) => ({
+  type: VOTE_POST,
+  post
+})
+
+export const votePost = (id, option) => (dispatch) => (
+  ReadableAPI.votePost(id, option)
+    .then(data => {
+      dispatch(sendPostVote(data))
     })
     .catch(err => console.error(err))
 )
@@ -163,6 +178,19 @@ export const deleteComment = (id) => (dispatch) => (
   ReadableAPI.deleteComment(id)
     .then(data => {
       dispatch(removeComment(data))
+    })
+    .catch(err => console.error(err))
+)
+
+const sendCommentVote = (comment) => ({
+  type: VOTE_COMMENT,
+  comment
+})
+
+export const voteComment = (id, option) => (dispatch) => (
+  ReadableAPI.voteComment(id, option)
+    .then(data => {
+      dispatch(sendCommentVote(data))
     })
     .catch(err => console.error(err))
 )

@@ -17,6 +17,7 @@ import sortBy from 'sort-by'
 import {
   getCategories,
   getPosts,
+  votePost
 } from '../../actions'
 
 /* Helpers */
@@ -60,6 +61,13 @@ class Main extends Component {
     })
   }
 
+  onPostVote = (event, id, option) => {
+    event.preventDefault()
+    const { updatePostVote } = this.props
+
+    updatePostVote(id, option)
+  }
+
   render() {
     const { categories, posts, history } = this.props
     const categoryParam = this.props.match.params.category
@@ -89,9 +97,10 @@ class Main extends Component {
 
         <ListPosts
           posts={postsToDisplay}
+          votePostHandle={this.onPostVote}
         />
-        <div className="add-new-container">
-          <Link to="/new/post" className="add-new-button"><span>+</span></Link>
+        <div className="action-container">
+          <Link to="/new/post" className="action-button"><span>+</span></Link>
         </div>
       </div>
     )
@@ -113,12 +122,9 @@ const mapStateToProps = ({ categories, posts }, { match }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllCategories(){
-      dispatch(getCategories())
-    },
-    getAllPosts(){
-      dispatch(getPosts())
-    },
+    getAllCategories: () => dispatch(getCategories()),
+    getAllPosts: () => dispatch(getPosts()),
+    updatePostVote: (postId, option) => dispatch(votePost(postId, option))
   }
 }
 

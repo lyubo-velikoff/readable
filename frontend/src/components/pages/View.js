@@ -16,6 +16,8 @@ import {
   getComments,
   deletePost,
   deleteComment,
+  votePost,
+  voteComment,
 } from '../../actions'
 
 /* UUID */
@@ -67,6 +69,20 @@ class View extends Component {
     }
   }
 
+  onPostVote = (event, id, option) => {
+    event.preventDefault()
+    const { updatePostVote } = this.props
+
+    updatePostVote(id, option)
+  }
+
+  onCommentVote = (event, id, option) => {
+    event.preventDefault()
+    const { updateCommentVote } = this.props
+
+    updateCommentVote(id, option)
+  }
+
   render() {
     const { post, comments } = this.props
     const { postId } = this.props.match.params
@@ -80,6 +96,8 @@ class View extends Component {
             comments={comments}
             deletePostHandle={this.onPostDelete}
             deleteCommentHandle={this.onCommentDelete}
+            votePostHandle={this.onPostVote}
+            voteCommentHandle={this.onCommentVote}
           />
         ) : (
           <div className="no-post container">
@@ -101,6 +119,8 @@ const mapDispatchToProps = (dispatch) => {
     getPostComments: (postId) => dispatch(getComments(postId)),
     removePost: (post) => dispatch(deletePost(post)),
     removeComment: (comment) => dispatch(deleteComment(comment)),
+    updatePostVote: (postId, option) => dispatch(votePost(postId, option)),
+    updateCommentVote: (commentId, option) => dispatch(voteComment(commentId, option)),
   }
 }
 

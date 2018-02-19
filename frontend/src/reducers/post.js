@@ -1,6 +1,7 @@
 import { 
   RECEIVE_POST,
   EDIT_POST,
+  VOTE_POST,
   DELETE_POST,
 } from '../actions/types'
 
@@ -9,6 +10,8 @@ export default (state = {}, action) => {
     case RECEIVE_POST:
       return action.post
     case EDIT_POST:
+      return action.post
+    case VOTE_POST:
       return action.post
     case DELETE_POST:
       return {}

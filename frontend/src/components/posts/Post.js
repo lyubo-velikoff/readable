@@ -10,8 +10,12 @@ import Time from 'react-time'
 /* Router */
 import { Link } from 'react-router-dom'
 
+/* Components */
+import Vote from '../helpers/Vote'
+
 const Post = (props) => {
-  const { post, deletePostHandle } = props
+  const { post, deletePostHandle, votePostHandle } = props
+
   return (
     <div className="single-post">
       Post details
@@ -19,6 +23,7 @@ const Post = (props) => {
       <div className="body">{post.body}</div>
       <div className="author-date">Written by {post.author} on <Time value={post.timestamp} format="YYYY/MM/DD" /></div>
       <div className="score">Score: {post.voteScore}</div>
+      <Vote type={post} voteHandle={votePostHandle}/>
       <div className="mt20">
         <Link to={`/edit/post/${post.id}`} className="edit">Edit post</Link>
         <Link to="#" onClick={(event) => deletePostHandle(event, post.id)} className="delete">Delete post</Link>          
@@ -30,6 +35,7 @@ const Post = (props) => {
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   deletePostHandle: PropTypes.func.isRequired,
+  votePostHandle: PropTypes.func.isRequired,
 }
 
 export default Post
