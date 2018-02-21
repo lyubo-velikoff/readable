@@ -14,23 +14,27 @@ import Time from 'react-time'
 import Vote from '../helpers/Vote'
 
 const List = (props) => {
-  const { posts, votePostHandle, } = props
+  const { posts, votePostHandle, deletePostHandle } = props
 
   return (
     <div className="list-posts">
       <ul className="posts-list container">
         {posts.map(post => (
           <li key={post.id} className="post">
-            <Link to={`/posts/${post.category}/${post.id}`} className="post-link">
+            <Link to={`/${post.category}/${post.id}`} className="post-link">
               {post.title}
-              <span className="post-date"><Time value={post.timestamp} format="YYYY/MM/DD" /></span>
+              <div className="post-date post-author">Written by {post.author} on <Time value={post.timestamp} format="YYYY/MM/DD" /></div>
+              <span className="post-comment-count">Comments: {post.commentCount}</span>
               <span className="post-score">
                 Score: {post.voteScore}
               </span>
-              <span className="post-comment-count">Comments: {post.commentCount}</span>
               <span className="post-icon">&raquo;</span>
               <Vote type={post} voteHandle={votePostHandle}/>
             </Link>
+            <div className="pt30">
+              <Link to={`/edit/post/${post.id}`} className="edit">Edit</Link>
+              <Link to="#" onClick={(event) => deletePostHandle(event, post.id)} className="delete">Delete</Link>          
+            </div>
           </li>
         ))}
       </ul>
@@ -41,6 +45,7 @@ const List = (props) => {
 List.propTypes = {
   posts: PropTypes.array.isRequired,
   votePostHandle: PropTypes.func.isRequired,
+  deletePostHandle: PropTypes.func.isRequired,
 }
 
 export default List

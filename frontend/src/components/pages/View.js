@@ -22,6 +22,7 @@ import {
 
 /* Components */
 import ViewPost from '../posts/Single'
+import PageNotFound from './NotFound'
 
 class View extends Component {
   static propTypes = {
@@ -82,12 +83,12 @@ class View extends Component {
 
   render() {
     const { post, comments } = this.props
-    const { postId } = this.props.match.params
 
     return (
-      <div className="view-page">
-
-        {post.id ? (
+      (!post.id) ?
+        <PageNotFound />
+      : 
+        <div className="view-page">
           <ViewPost 
             post={post} 
             comments={comments}
@@ -96,12 +97,7 @@ class View extends Component {
             votePostHandle={this.onPostVote}
             voteCommentHandle={this.onCommentVote}
           />
-        ) : (
-          <div className="no-post container">
-            Post id: {postId} does not exists
-          </div>
-        )}
-      </div>
+        </div>
     )
   }
 }

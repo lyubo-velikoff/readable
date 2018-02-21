@@ -65,7 +65,7 @@ class CreateEitPost extends Component {
         'author': author,
         'category': category,
       })
-      this.redirect(`/posts/${category}/${id}`)
+      this.redirect(`/${category}/${id}`)
     } else {
       // new
       insertPost({
@@ -92,7 +92,7 @@ class CreateEitPost extends Component {
     const { categories, post } = this.props
     const { title, body, author, category, isEdit } = this.state
     const { path } = this.props.match
-    const goBackPath = post && post.id && post.category && path !== '/new/post'  ? `/posts/${post.category}/${post.id}` : '/'
+    const goBackPath = post && post.id && post.category && path !== '/new/post'  ? `/${post.category}/${post.id}` : '/'
     return (
       <div>
         <GoBack path={goBackPath} additionalClasses="container" />

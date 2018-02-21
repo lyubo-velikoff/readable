@@ -17,7 +17,8 @@ import sortBy from 'sort-by'
 import {
   getCategories,
   getPosts,
-  votePost
+  votePost,
+  deletePost
 } from '../../actions'
 
 /* Helpers */
@@ -68,6 +69,22 @@ class Main extends Component {
     updatePostVote(id, option)
   }
 
+  onPostDelete = (event, id) => {
+    event.preventDefault()
+    const { removePost } = this.props
+
+    if(window.confirm('Are you sure?')) {
+      removePost(id).then(() => {
+        this.redirect('/')
+      })
+    }
+  }
+
+  redirect = (path) => {
+    const { history } = this.props
+    history.push(path)
+  }
+
   render() {
     const { categories, posts, history } = this.props
     const categoryParam = this.props.match.params.category
@@ -84,7 +101,7 @@ class Main extends Component {
             categories={categories}
             category={categoryParam}
             showAll={true}
-            handleCategoryChange={(e) => history.push(`/posts/${e.target.value}`)}
+            handleCategoryChange={(e) => history.push(`/${e.target.value}`)}
           />
         </div>
 
@@ -98,6 +115,7 @@ class Main extends Component {
         <ListPosts
           posts={postsToDisplay}
           votePostHandle={this.onPostVote}
+          deletePostHandle={this.onPostDelete}
         />
         <div className="action-container">
           <Link to="/new/post" className="action-button"><span>+</span></Link>
@@ -124,7 +142,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllCategories: () => dispatch(getCategories()),
     getAllPosts: () => dispatch(getPosts()),
-    updatePostVote: (postId, option) => dispatch(votePost(postId, option))
+    updatePostVote: (postId, option) => dispatch(votePost(postId, option)),
+    removePost: (post) => dispatch(deletePost(post)),
   }
 }
 

@@ -67,7 +67,7 @@ class CreateEditComment extends Component {
 
     let path = '/'
     if (post && post.category) {
-      path = `/posts/${post.category}/${postId || parentId}`
+      path = `/${post.category}/${postId || parentId}`
     }
     this.redirect(path)
   }
@@ -89,7 +89,7 @@ class CreateEditComment extends Component {
 
   render() {
     const { post } = this.props
-    const goBackPath = post && post.category && post.id ? `/posts/${post.category}/${post.id}` : '/'
+    const goBackPath = post && post.category && post.id ? `/${post.category}/${post.id}` : '/'
     const { author, body, isEdit } = this.state
 
     return (

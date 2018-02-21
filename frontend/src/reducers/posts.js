@@ -2,6 +2,7 @@ import {
   RECEIVE_POSTS,
   SEND_POST,
   VOTE_POST,
+  DELETE_POST,
 } from '../actions/types'
 
 export default (state = [], action) => {
@@ -20,6 +21,8 @@ export default (state = [], action) => {
         action.post,
         ...state.slice(index + 1),
       ]
+    case DELETE_POST:
+      return state.filter((post) => post.id !== action.post.id)
     default:
       return state
   }
